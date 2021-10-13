@@ -1,0 +1,110 @@
+﻿@model EcommerceApp.Models.Company
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Company";
+}
+<style>
+ 
+    .form-check .form-check-input[type=checkbox] {
+        border-radius: .25em;
+        height: 50px;
+        width: 50px;
+        align-items: center;
+    }
+</style>
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Id != 0)
+        {
+            //edit
+            title = "Edit Company";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4 text-center">
+            <div class="form-group row p-2">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2">
+                <div class="col-4">
+                    <label asp-for="StreetAddress">Street Adress</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="StreetAddress" class="form-control" />
+                    <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2">
+                <div class="col-4">
+                    <label asp-for="City"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2">
+                <div class="col-4">
+                    <label asp-for="State"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2">
+                <div class="col-4">
+                    <label asp-for="PostalCode">Postal Code</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PostalCode" class="form-control" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2">
+                <div class="col-4">
+                    <label asp-for="PhoneNumber">Phone Number</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2 ">
+                <div class="col-4">
+                    <label asp-for="IsAuthorizedCompany">Is Authorized Company</label>
+                </div>
+                <div class="col-3"></div>
+                <div class="col-4">
+                    <input type="checkbox" asp-for="IsAuthorizedCompany" class=" form-check  form-check-input" id="materialUnchecked"  />
+                </div>
+            </div>
+            <br />
+            <div class="form-group row p-2">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+                    }
+                    else
+                    {
+                        <partial name="_CreateAndBackToListButton" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

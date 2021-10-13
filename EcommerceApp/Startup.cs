@@ -1,9 +1,13 @@
 using EcommerceApp.DataAccess.Data;
+using EcommerceApp.DataAccess.Repository;
+using EcommerceApp.DataAccess.Repository.IRepository;
+using EcommerceApp.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +34,30 @@ namespace EcommerceApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddRazorPages();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "1279936525755954";
+                options.AppSecret = "244d45769159955fcbef64627d0c68bb";
+            });
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "895486855460-08v0q2564vc7g34v5kikcphv1sicfnfa.apps.googleusercontent.com";
+                options.ClientSecret = "_WCYlBCy2qoEIci4XBbj62FV";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
