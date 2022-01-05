@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace EcommerceApp.DataAccess.Repository
 {
+    /// <summary>
+    /// We use this class to access company from database
+    /// </summary>
     public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
         private readonly ApplicationDbContext _db;

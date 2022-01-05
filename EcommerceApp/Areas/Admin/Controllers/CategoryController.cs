@@ -24,7 +24,11 @@ namespace EcommerceApp.Areas.Admin.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Retrieve the page for the category with a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
             Category category = new Category();
@@ -42,8 +46,16 @@ namespace EcommerceApp.Areas.Admin.Controllers
             return View(category);
 
         }
+        /// <summary>
+        /// If the category already exists this function will update it, other way will simply add it 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+
         public IActionResult Upsert(Category category)
         {
             if (ModelState.IsValid)
@@ -63,16 +75,23 @@ namespace EcommerceApp.Areas.Admin.Controllers
             return View(category);
         }
 
-
+        
         #region API CALLS
-
+        /// <summary>
+        /// Retrieves all categories
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll()
         {
             var allObj = _unitOfWork.Category.GetAll();
             return Json(new { data = allObj });
         } 
-
+        /// <summary>
+        /// Deletes a category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public IActionResult Delete(int id)
         {

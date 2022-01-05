@@ -25,6 +25,11 @@ namespace EcommerceApp.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Retrieve the page for the company with a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
             Company company = new Company();
@@ -42,6 +47,12 @@ namespace EcommerceApp.Areas.Admin.Controllers
             return View(company);
 
         }
+
+        /// <summary>
+        ///  If the company already exists this function will update it, other way will simply add it 
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Company company)
@@ -65,14 +76,22 @@ namespace EcommerceApp.Areas.Admin.Controllers
 
 
         #region API CALLS
-
+        /// <summary>
+        /// return all companies
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll()
         {
             var allObj = _unitOfWork.Company.GetAll();
             return Json(new { data = allObj });
         } 
-
+        /// <summary>
+        /// 
+        /// delete a company
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public IActionResult Delete(int id)
         {

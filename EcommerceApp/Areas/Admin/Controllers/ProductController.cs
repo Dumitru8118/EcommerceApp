@@ -30,7 +30,11 @@ namespace EcommerceApp.Areas.Admin.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Retrieve the page for product with a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new ProductVM()
@@ -56,6 +60,11 @@ namespace EcommerceApp.Areas.Admin.Controllers
             return View(productVM);
 
         }
+        /// <summary>
+        /// If the product already exists this function will update it, other way will simply add it 
+        /// </summary>
+        /// <param name="productVM"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM productVM)
@@ -111,14 +120,21 @@ namespace EcommerceApp.Areas.Admin.Controllers
 
 
         #region API CALLS
-
+        /// <summary>
+        /// Retrieve all products
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll()
         {
             var allObj = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return Json(new { data = allObj });
         } 
-
+        /// <summary>
+        /// Delete a product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public IActionResult Delete(int id)
         {

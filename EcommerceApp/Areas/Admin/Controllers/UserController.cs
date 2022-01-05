@@ -30,7 +30,10 @@ namespace EcommerceApp.Areas.Admin.Controllers
       
 
         #region API CALLS
-
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -53,7 +56,11 @@ namespace EcommerceApp.Areas.Admin.Controllers
             return Json(new { data = userList });
 
         } 
-
+        /// <summary>
+        /// Blocks/Unblock an user 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
 
         public IActionResult LockUnlock([FromBody] string id)

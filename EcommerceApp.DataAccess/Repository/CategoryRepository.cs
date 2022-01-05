@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace EcommerceApp.DataAccess.Repository
 {
+    /// <summary>
+    ///  We use this class to access categories from our database
+    /// </summary>
+
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         private readonly ApplicationDbContext _db;

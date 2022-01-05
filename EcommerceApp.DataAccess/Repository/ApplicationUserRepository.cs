@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace EcommerceApp.DataAccess.Repository
 {
+    /// <summary>
+    /// we use this class to work with user from database
+    /// </summary>
     public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
     {
         private readonly ApplicationDbContext _db;
