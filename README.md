@@ -1,7 +1,7 @@
 # EcommerceApp
 
   This is an online store for books and tea, finished in a proportion of 65-70%, made using technologies like: C#, Asp.Net, EntityFramework, Dapper, MSQL, JS, Bootstrap;
-  as for the code architecture, I have used MVC schema, and repository design pattern.   
+  as for the code architecture, I have used MVC schema, and Repository with Unit of Work design pattern.   
   
   
 ![home screen after log in](https://user-images.githubusercontent.com/86912887/137473908-8a38ecd3-50ee-468e-87b0-61d5a502c61d.PNG)
